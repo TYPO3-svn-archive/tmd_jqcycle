@@ -71,7 +71,7 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 
 			# JQuery Code kommt dazu.
 			# Abhängig von EXT Konfiguration machen
-		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath('tmd_jqcycle').'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
 
 				/* Konfiguration */
 		$this->initFeature($this->option('feature' ,'s_configuration'));
