@@ -2,7 +2,7 @@
 <T3locallang>
 	<meta type="array">
 		<type>database</type>
-		<description>Language labels for database tables/fields belonging to extension 'tmdjqcycle'</description>
+		<description>Language labels for database tables/fields belonging to extension 'tmd_jqcycle'</description>
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
@@ -48,7 +48,7 @@
 			<label index="tx_tmdjqcycle_feature25">turnRight</label>
 			<label index="tx_tmdjqcycle_feature26">uncover</label>
 			<label index="tx_tmdjqcycle_feature27">wipe</label>
-			<label index="tx_tmd _feature28">zoom</label>
+			<label index="tx_tmdjqcycle_feature28">zoom</label>
 
 
 		</languageKey>

@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "tmd_jqcycle".
 #
-# Auto generated 17-01-2010 02:08
+# Auto generated 17-01-2010 15:13
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -13,7 +13,7 @@
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'jquery Cycle Plugin',
 	'description' => '',
-	'category' => '',
+	'category' => 'fe',
 	'author' => 'Christian Tauscher',
 	'author_email' => 'cms@media-distillery.de',
 	'shy' => '',
@@ -23,10 +23,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'module' => '',
 	'state' => 'alpha',
 	'internal' => '',
-	'uploadfolder' => 0,
+	'uploadfolder' => 1,
 	'createDirs' => '',
 	'modify_tables' => '',
-	'clearCacheOnLoad' => 0,
+	'clearCacheOnLoad' => 1,
 	'lockType' => '',
 	'author_company' => '',
 	'version' => '0.0.0',
@@ -39,7 +39,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 		),
 	),
-	'_md5_values_when_last_written' => 'a:10:{s:9:"ChangeLog";s:4:"0ae0";s:10:"README.txt";s:4:"ee2d";s:12:"ext_icon.gif";s:4:"1bdc";s:17:"ext_localconf.php";s:4:"dbba";s:14:"ext_tables.php";s:4:"bfd4";s:16:"locallang_db.xml";s:4:"588f";s:19:"doc/wizard_form.dat";s:4:"94a5";s:20:"doc/wizard_form.html";s:4:"42d4";s:31:"pi1/class.tx_tmdjqcycle_pi1.php";s:4:"6092";s:17:"pi1/locallang.xml";s:4:"b0b5";}',
+	'_md5_values_when_last_written' => 'a:13:{s:9:"ChangeLog";s:4:"0ae0";s:10:"README.txt";s:4:"ee2d";s:12:"ext_icon.gif";s:4:"1bdc";s:17:"ext_localconf.php";s:4:"dbba";s:14:"ext_tables.php";s:4:"7395";s:20:"flexform_default.xml";s:4:"ecc4";s:16:"locallang_db.xml";s:4:"f999";s:19:"doc/wizard_form.dat";s:4:"6d5d";s:20:"doc/wizard_form.html";s:4:"014b";s:31:"pi1/class.tx_tmdjqcycle_pi1.php";s:4:"2ead";s:17:"pi1/locallang.xml";s:4:"b0b5";s:33:"static/defaultSetup/constants.txt";s:4:"d41d";s:29:"static/defaultSetup/setup.txt";s:4:"2d35";}',
 );
 
 ?>

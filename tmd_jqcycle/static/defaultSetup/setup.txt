@@ -1,0 +1,49 @@
+
+plugin.tx_tmdjqcycle_pi1 {
+	
+#	image.file.width = 250c
+#	image.file.height = 250c
+
+	/* Features
+	 2 blindX
+	 3 blindY
+	 4 blindZ
+	 5 cover
+	 6 curtainX
+	 7 curtainY
+	 8 fade
+	 9 fadeZoom
+	10 growX
+	11 growY
+	12 scrollUp
+	13 scrollDown
+	14 scrollLeft
+	15 scrollRight
+	16 scrollHorz
+	17 scrollVert
+	18 shuffle
+	19 slideX
+	20 slideY
+	21 toss
+	22 turnUp
+	23 turnDown
+	24 turnLeft
+	25 turnRight
+	26 uncover
+	27 wipe
+	28 zoom
+	*/
+	feature = 8 
+
+	random = 1 
+	speed = 1500
+	timeout = 2000
+	pause = 1000
+	delay = -4000 
+	timeout = 0
+	sync = 1 
+	
+	images = CSV
+	width = 400
+	height = 120
+}

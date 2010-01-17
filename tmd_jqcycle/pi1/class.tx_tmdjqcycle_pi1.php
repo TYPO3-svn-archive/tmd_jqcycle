@@ -38,7 +38,7 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * @package	TYPO3
  * @subpackage	tx_tmdjqcycle
  */
-class tx_jqcycle_pi1 extends tslib_pibase {
+class tx_tmdjqcycle_pi1 extends tslib_pibase {
 	var $prefixId      = 'tx_tmdjqcycle_pi1';		// Same as class name
 	var $scriptRelPath = 'pi1/class.tx_tmdjqcycle_pi1.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'tmd_jqcycle';	// The extension key.
@@ -71,30 +71,29 @@ class tx_jqcycle_pi1 extends tslib_pibase {
 
 			# JQuery Code kommt dazu.
 			# Abhängig von EXT Konfiguration machen
-		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath('jqcycle').'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath('tmd_jqcycle').'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
 
 				/* Konfiguration */
 		$this->initFeature($this->option('feature' ,'s_configuration'));
-		$config  = "
-			$(document).ready(function() {
-			    $('#slideshow-".$this->param['id']."').cycle({";
+		$config  = "$(document).ready(function() {
+		    		$('#slideshow-".$this->param['id']."').cycle({";
 
-		foreach($this->param as $key => $val) {
-			$line[] = $key.': "'.$val.'"';
-		}
-		$config .= implode(',', $line);
+			foreach($this->param as $key => $val) {
+				$line[] = $key.': "'.$val.'"';
+			}
+			$config .= implode(',', $line);
 		
-		$config .= "});
-			});
-			";
-debug(array($this->param, $config));
-		
+		$config .= "	});
+					});";
+
 		$content = t3lib_div::wrapJS($config);
 
 		$images = explode(',', $this->option('images', 's_image'));
 		$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
 		$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
 
+		debug(array($this->param, $config, $this->conf, $images));
+		
 		foreach($images as $img) {
 			$this->conf['image.']['file'] = $this->uploadPath.$img;
  			$files[] = $this->cObj->IMAGE($this->conf['image.']);
@@ -103,7 +102,7 @@ debug(array($this->param, $config));
 		$content .='<div class="slideshows" id="slideshow-'.$this->param['id'].'">';
 		$content .= implode(chr(13), $files);
 		$content .= '</div>';
-	
+
 		return $this->pi_wrapInBaseClass($content);
 	}
 
@@ -112,8 +111,10 @@ debug(array($this->param, $config));
 	
 	function option($key, $sheet = '') {
 		$value = $this->conf[$key];
+		
 		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], $key, $sheet))
 			$value = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $key, $sheet);
+		
 		
 		return $value;
 	}
@@ -131,10 +132,10 @@ debug(array($this->param, $config));
 				$this->param = array(
 					"id" => rand(1000, 9999),
 					"fx" => 'fade',
-					"speed" => $this->option("speed", "s_configuration"), 
+/*					"speed" => $this->option("speed", "s_configuration"), 
 					"pause" => $this->option("pause", "s_configuration"),
 					"random" => $this->option("random", "s_configuration"), 
-					);
+*/					);
 			break;
 			case '9': $value='fadeZoom'; break;
 			case '10': $value='growX'; break;
@@ -204,7 +205,8 @@ debug(array($this->param, $config));
 
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jqcycle/pi1/class.tx_tmdjqcycle_pi1.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jqcycle/pi1/class.tx_tmdjqcycle_pi1.php']);
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tmd_jqcycle/pi1/class.tx_tmdjqcycle_pi1.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tmd_jqcycle/pi1/class.tx_tmdjqcycle_pi1.php']);
 }
 ?>
