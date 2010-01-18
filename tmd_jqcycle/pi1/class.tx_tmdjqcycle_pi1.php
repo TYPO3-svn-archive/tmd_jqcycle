@@ -66,8 +66,18 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		} else {
 			return "Error: t3jquery fehlt!";
 		}
+		
+
+		
 		// if t3jquery is loaded and the custom Library had been created
-		tx_t3jquery::addJqJS();
+		if (T3JQUERY === true) {
+			tx_t3jquery::addJqJS();
+		} else {
+			return "Error: t3jquery fehlt2!";
+			// Here you add your own version of jQuery library, which is used if the
+			// "t3jquery" extension is not installed.
+			#$GLOBALS['TSFE']->additionalHeaderData[] = ..
+		}
 
 			# JQuery Code kommt dazu.
 			# Abhängig von EXT Konfiguration machen
@@ -92,7 +102,7 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
 		$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
 
-		debug(array($this->param, $config, $this->conf, $images));
+debug(array($this->param, $config, $this->conf, $images));
 		
 		foreach($images as $img) {
 			$this->conf['image.']['file'] = $this->uploadPath.$img;
@@ -115,10 +125,15 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], $key, $sheet))
 			$value = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], $key, $sheet);
 		
+		if($key == 'images' && isset($this->conf['images.'])) {
+				$value = $this->cObj->TEXT($this->conf['images.']);
+		}
 		
 		return $value;
 	}
 
+
+	
 	
 	function initFeature($value) {
 		 switch ($value) {
