@@ -79,8 +79,7 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 			#$GLOBALS['TSFE']->additionalHeaderData[] = ..
 		}
 
-			# JQuery Code kommt dazu.
-			# Abhängig von EXT Konfiguration machen
+			#JQuery-CYCLE Code kommt dazu.
 		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
 
 				/* Konfiguration */
@@ -102,7 +101,7 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
 		$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
 
-debug(array($this->param, $config, $this->conf, $images));
+#debug(array($this->param, $config, $this->conf, $images));
 		
 		foreach($images as $img) {
 			$this->conf['image.']['file'] = $this->uploadPath.$img;
