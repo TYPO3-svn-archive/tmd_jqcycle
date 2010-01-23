@@ -10,18 +10,31 @@
 			
 			<!-- Flexforms -->
 			<label index="tx_tmdjqcycle_sheet_content">Inhalt</label>
-			
 			<label index="tx_tmdjqcycle_sheet_configuration">Konfiguration</label>
-			<label index="tx_tmdjqcycle_random">Zufällige Reihenfolge</label>			
-			<label index="tx_tmdjqcycle_pause">Pause Mouse Over</label>
-			<label index="tx_tmdjqcycle_sync">Sync</label>
-			<label index="tx_tmdjqcycle_timeout">Standzeit (ms)</label>
-			<label index="tx_tmdjqcycle_speed">Wechselgeschwindigkeit (ms)</label>
-			<label index="tx_tmdjqcycle_delay">Verzoegerung (-ms)</label>
-			<label index="tx_tmdjqcycle_width">Breite</label>
-			<label index="tx_tmdjqcycle_height">Hoehe</label>
+			<label index="tx_tmdjqcycle_sheet_advanced">Experts</label>
+			<label index="tx_tmdjqcycle_useAdvanced">Use Advanced Configuration. Overwrites configuration completely</label>
+			<label index="tx_tmdjqcycle_advanced">Advanced Confuguratin</label>
+			
+			<label index="tx_tmdjqcycle_mode1">Pictures</label>
+			<label index="tx_tmdjqcycle_mode2">Content Elements</label>
 
-			<label index="tx_tmdjqcycle_feature">Wechel Effekt</label>
+			<label index="tx_tmdjqcycle_modeImage">Pictures</label>
+			<label index="tx_tmdjqcycle_modeContent">Pictures</label>
+				
+			<label index="tx_tmdjqcycle_width">Image width</label>
+			<label index="tx_tmdjqcycle_height">Image height</label>
+					
+			<label index="tx_tmdjqcycle_timeout">timeout: 4000,  // milliseconds between slide transitions (0 to disable auto advance)</label>
+			<label index="tx_tmdjqcycle_speed">speed: 1000,  // speed of the transition (any valid fx speed value)</label>
+			<label index="tx_tmdjqcycle_speedIn">speedIn: 0,  // speed of the 'in' transition</label>
+			<label index="tx_tmdjqcycle_speedOut">speedOut: 0,  // speed of the 'out' transition</label>
+			<label index="tx_tmdjqcycle_random">random: 0,     // true for random, false for sequence (not applicable to shuffle fx)</label>
+			<label index="tx_tmdjqcycle_sync">sync: 1,     // true if in/out transitions should occur simultaneously</label>
+			<label index="tx_tmdjqcycle_pause">pause: 0,     // true to enable "pause on hover"</label>
+ 			<label index="tx_tmdjqcycle_delay">delay: 0,     // additional delay (in ms) for first transition (hint: can be negative) </label>
+ 			<label index="tx_tmdjqcycle_continuous">continuous: 0,     // true to start next transition immediately after current one completes</label>
+
+			<label index="tx_tmdjqcycle_feature">Effekt</label>
 			<label index="tx_tmdjqcycle_feature2">blindX</label>
 			<label index="tx_tmdjqcycle_feature3">blindY</label>
 			<label index="tx_tmdjqcycle_feature4">blindZ</label>

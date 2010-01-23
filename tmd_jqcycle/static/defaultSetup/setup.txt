@@ -5,6 +5,8 @@ plugin.tx_tmdjqcycle_pi1 {
 #	image.file.height = 250c
 
 	/* Features
+	 0 Advanced Mode
+	 
 	 2 blindX
 	 3 blindY
 	 4 blindZ
@@ -33,17 +35,30 @@ plugin.tx_tmdjqcycle_pi1 {
 	27 wipe
 	28 zoom
 	*/
-	feature = 8 
 
-	random = 1 
-	speed = 1500
-	timeout = 2000
-	pause = 1000
-	delay = -4000 
-	timeout = 0
-	sync = 1 
+	feature = 8 
 	
-	images = CSV
 	width = 400
 	height = 120
+	
+	useAdvanced = 0
+	advanced (
+		fx:   'shuffle', 
+		shuffle: { 
+	    	top:  -230, 
+	    	left:  230 
+		}, 
+		delay: -2000
+	)
+	
+	timeout = 0
+	speed = 0			
+	speedIn = 0 
+	speedOut = 0
+	random = 0
+	sync = 1  
+	pause = 0
+	delay = 0
+	continuous = 0
+
 }

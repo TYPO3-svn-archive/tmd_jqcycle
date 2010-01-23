@@ -58,59 +58,69 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		$this->pi_initPIflexForm();
 
-		
-		
-			// checks if t3jquery is loaded
-		if (t3lib_extMgm::isLoaded('t3jquery')) {
-		    require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
-		} else {
-			return "Error: t3jquery fehlt!";
-		}
-		
-
-		
-		// if t3jquery is loaded and the custom Library had been created
-		if (T3JQUERY === true) {
-			tx_t3jquery::addJqJS();
-		} else {
-			return "Error: t3jquery fehlt2!";
-			// Here you add your own version of jQuery library, which is used if the
-			// "t3jquery" extension is not installed.
-			#$GLOBALS['TSFE']->additionalHeaderData[] = ..
-		}
-
-			#JQuery-CYCLE Code kommt dazu.
-		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
-
-				/* Konfiguration */
-		$this->initFeature($this->option('feature' ,'s_configuration'));
-		$config  = "$(document).ready(function() {
-		    		$('#slideshow-".$this->param['id']."').cycle({";
-
-			foreach($this->param as $key => $val) {
-				$line[] = $key.': "'.$val.'"';
-			}
-			$config .= implode(',', $line);
-		
-		$config .= "	});
-					});";
-
-		$content = t3lib_div::wrapJS($config);
-
 		$images = explode(',', $this->option('images', 's_image'));
-		$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
-		$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
-
-#debug(array($this->param, $config, $this->conf, $images));
 		
-		foreach($images as $img) {
-			$this->conf['image.']['file'] = $this->uploadPath.$img;
- 			$files[] = $this->cObj->IMAGE($this->conf['image.']);
-		}
+		if(count($images) > 1) {
 
-		$content .='<div class="slideshows" id="slideshow-'.$this->param['id'].'">';
-		$content .= implode(chr(13), $files);
-		$content .= '</div>';
+				// checks if t3jquery is loaded
+			if (t3lib_extMgm::isLoaded('t3jquery')) {
+			    require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+			} else {
+				return "Error: t3jquery fehlt!";
+			}
+			
+			// if t3jquery is loaded and the custom Library had been created
+			if (T3JQUERY === true) {
+				tx_t3jquery::addJqJS();
+			} else {
+				return "Error: t3jquery fehlt2!";
+				// Here you add your own version of jQuery library, which is used if the
+				// "t3jquery" extension is not installed.
+				#$GLOBALS['TSFE']->additionalHeaderData[] = ..
+			}
+	
+				#JQuery-CYCLE Code kommt dazu.
+			$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
+
+					/* Konfiguration */
+			$this->initFeature();
+			$config  = "$(document).ready(function() {
+			    		$('#slideshow-".$this->param['id']."').cycle({";
+
+
+				if($this->option('useAdvanced',  's_advanced') != 1) {
+					foreach($this->param as $key => $val) {
+						$line[] = $key.': "'.$val.'"';
+					}
+					$config .= implode(',', $line);
+				} else {
+					$config .= $this->option('advanced',  's_advanced');
+				}
+				
+			$config .= "	});
+						});";
+
+	
+			$content = t3lib_div::wrapJS($config);
+	
+			$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
+			$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
+	
+			foreach($images as $img) {
+				$this->conf['image.']['file'] = $this->uploadPath.$img;
+	 			$files[] = $this->cObj->IMAGE($this->conf['image.']);
+			}
+	
+			$content .='<div class="slideshows" id="slideshow-'.$this->param['id'].'">';
+			$content .= implode(chr(13), $files);
+			$content .= '</div>';
+		} else { # nur ein Bild vorhanden
+			$this->conf['image.']['file'] = $this->uploadPath.$images[0];
+			$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
+			$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
+
+			$content = $this->cObj->IMAGE($this->conf['image.']);
+		}
 
 		return $this->pi_wrapInBaseClass($content);
 	}
@@ -134,86 +144,25 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 
 	
 	
-	function initFeature($value) {
-		 switch ($value) {
-			case '2': $value='blindX'; break;
-			case '3': $value='blindY'; break;
-			case '4': $value='blindZ'; break;
-			case '5': $value='cover'; break;
-			case '6': $value='curtainX'; break;
-			case '7': $value='curtainY'; break;
-			case '8': 
-				$this->param = array(
-					"id" => rand(1000, 9999),
-					"fx" => 'fade',
-/*					"speed" => $this->option("speed", "s_configuration"), 
-					"pause" => $this->option("pause", "s_configuration"),
-					"random" => $this->option("random", "s_configuration"), 
-*/					);
-			break;
-			case '9': $value='fadeZoom'; break;
-			case '10': $value='growX'; break;
-			case '11': $value='growY'; break;
-			case '12': $value='scrollUp'; break;
-			case '13': 
-				$this->param = array(
-					"id" => rand(1000, 9999),
-					"fx" => 'scrollDown',
-					"speed" => $this->option("speed", "s_configuration"), 
-					"timeout" => $this->option("timeout", "s_configuration"),
-					"pause" => $this->option("pause", "s_configuration"),
-					"random" => $this->option("random", "s_configuration"), 
-					);
-			break;
-			case '14': $value='scrollLeft'; break;
-			case '15': $value='scrollRight'; break;
-			case '16': $value='scrollHorz'; break;
-			case '17': $value='scrollVert'; break;
-			case '18':  
-				$this->param = array(
-					"id" => rand(1000, 9999),
-					"fx" => 'shuffle',
-					"delay" => -$this->option("delay", "s_configuration"), 
-#					"timeout" => $this->option("timeout", "s_configuration"),
-					"pause" => $this->option("pause", "s_configuration"),
-#					"random" => $this->option("random", "s_configuration"), 
-					);
-			break;
-			case '19':
-				$this->param = array(
-					"id" => rand(1000, 9999),
-					"fx" => 'slideX',
-					);
-			break;
-			case '20': 
-				$this->param = array(
-					"id" => rand(1000, 9999),
-					"fx" => 'slideY',
-					"speed" => $this->option("speed", "s_configuration"),
-					"timeout" => $this->option("timeout", "s_configuration"),
-				);
-				$this->param['next'] = '#slideshow-'.$this->param['id'];
-			break;
-			case '21': $value='toss'; break;
-			case '22': $value='turnUp'; break;
-			case '23': $value='turnDown'; break;
-			case '24': $value='turnLeft'; break;
-			case '25': $value='turnRight'; break;
-			case '26': $value='uncover'; break;
-			case '27': $value='wipe'; break;
-			case '28': 
-				$this->param = array(
-					"id" => rand(1000, 9999),
-					"fx" => 'zoom',
-					"sync" => $this->option("sync", "s_configuration"), 
-#					"timeout" => $this->option("timeout", "s_configuration"),
-#					"pause" => $this->option("pause", "s_configuration"),
-#					"random" => $this->option("random", "s_configuration"), 
-					);
-			break;
-		}
-
+	function initFeature() {
+		$this->param = array(
+			"id" => rand(1000, 9999),
+			"fx" => 'fade',
+			"width" 	=> $this->option("width", "s_configuration"),
+			"height" 	=> $this->option("height", "s_configuration"),
+			"timeout" 	=> $this->option("timeout", "s_configuration"),
+			"speed" 	=> $this->option("speed", "s_configuration"),
+			"speedIn" 	=> $this->option("speedIn", "s_configuration"),
+			"speedOut" 	=> $this->option("speedOut", "s_configuration"),
+			"random" 	=> $this->option("random", "s_configuration"),
+			"sync" 		=> $this->option("sync", "s_configuration"),
+			"pause" 	=> $this->option("pause", "s_configuration"),
+			"delay" 	=> $this->option("delay", "s_configuration"),
+			"continuous" => $this->option("continuous", "s_configuration"),
+			);
 	}
+
+	
 	
 }
 

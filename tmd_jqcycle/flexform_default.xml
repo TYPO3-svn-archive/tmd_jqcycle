@@ -16,9 +16,33 @@
 		<type>array</type>
 		<el>
 
+
+
+		<mode>
+			<TCEforms>
+			<label>Modus</label>
+			<config>
+				<type>select</type>
+				<items>
+					<numIndex index="0">
+						<numIndex index="0">LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_mode1</numIndex>
+						<numIndex index="1">IMAGE</numIndex>
+					</numIndex>
+					
+					<numIndex index="1">
+						<numIndex index="0">LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_mode2</numIndex>
+						<numIndex index="1">RECORD</numIndex>
+					</numIndex>
+
+				</items>
+			</config>
+		</TCEforms>
+		</mode>
+
 		<images>
 			<TCEforms>
-				<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_simage</label>
+				<displayCond>FIELD:mode:IN:IMAGE</displayCond>
+				<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_modeImage</label>
 				<config>
 					<type>group</type>
 					<internal_type>file</internal_type>
@@ -29,6 +53,25 @@
 				</config>
 			</TCEforms>
 		</images>
+
+		<content>
+		<TCEforms>
+			<displayCond>FIELD:mode:IN:RECORD</displayCond>
+			<exclude>1</exclude>
+			<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_modeRecord</label>
+			<config>
+				<type>group</type>
+				<internal_type>db</internal_type>
+				<allowed>tt_content</allowed>
+				<size>10</size>
+				<maxitems>100</maxitems>
+				<minitems>0</minitems>
+				<show_thumbs>0</show_thumbs>
+			</config>
+		</TCEforms>
+		</content>
+
+
 
 		</el>
         
@@ -44,6 +87,7 @@
         <type>array</type>
             <el>
             
+<!-- fx:           'fade', // name of transition effect (or comma separated names, ex: fade,scrollUp,shuffle) -->
 			<feature>
 				<TCEforms>
 					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_feature</label>
@@ -165,6 +209,49 @@
 			</feature>
 
 
+
+
+
+<!-- 
+    timeoutFn:     null,  // callback for determining per-slide timeout value:  function(currSlideElement, nextSlideElement, options, forwardFlag)
+    before:        null,  // transition callback (scope set to element to be shown):     function(currSlideElement, nextSlideElement, options, forwardFlag) 
+    after:         null,  // transition callback (scope set to element that was shown):  function(currSlideElement, nextSlideElement, options, forwardFlag) 
+    cleartype:     !$.support.opacity,  // true if clearType corrections should be applied (for IE)
+    next:          null,  // selector for element to use as click trigger for next slide 
+    prev:          null,  // selector for element to use as click trigger for previous slide 
+    prevNextClick: null,  // callback fn for prev/next clicks:  function(isNext, zeroBasedSlideIndex, slideElement) 
+    pager:         null,  // selector for element to use as pager container 
+    pagerClick:    null,  // callback fn for pager clicks:  function(zeroBasedSlideIndex, slideElement) 
+    pagerEvent:   'click', // name of event which drives the pager navigation 
+    pagerAnchorBuilder: null, // callback fn for building anchor links:  function(index, DOMelement) 
+    end:           null,  // callback invoked when the slideshow terminates (use with autostop or nowrap options): function(options) 
+    easing:        null,  // easing method for both in and out transitions 
+    easeIn:        null,  // easing for "in" transition 
+    easeOut:       null,  // easing for "out" transition 
+    shuffle:       null,  // coords for shuffle animation, ex: { top:15, left: 200 } 
+    animIn:        null,  // properties that define how the slide animates in 
+    animOut:       null,  // properties that define how the slide animates out 
+    cssBefore:     null,  // properties that define the initial state of the slide before transitioning in 
+    cssAfter:      null,  // properties that defined the state of the slide after transitioning out 
+    fxFn:          null,  // function used to control the transition: function(currSlideElement, nextSlideElement, options, afterCalback, forwardFlag) 
+    startingSlide: 0,     // zero-based index of the first slide to be displayed 
+    fit:           0,     // force slides to fit container 
+    containerResize: 1,   // resize container to fit largest slide 
+    pauseOnPagerHover: 0, // true to pause when hovering over pager link 
+    autostop:      0,     // true to end slideshow after X transitions (where X == slide count) 
+    autostopCount: 0,     // number of transitions (optionally used with autostop to define X) 
+    slideExpr:     null,  // expression for selecting slides (if something other than all children is required) 
+    cleartypeNoBg: false, // set to true to disable extra cleartype fixing (leave false to force background color setting on slides) 
+    nowrap:        0,     // true to prevent slideshow from wrapping 
+    fastOnEvent:   0,     // force fast transitions when triggered manually (via pager or prev/next); value == time in ms 
+    randomizeEffects: 1,  // valid when multiple effects are used; true to make the effect sequence random 
+    rev:           0,     // causes animations to transition in reverse 
+    manualTrump:   true,  // causes manual transition to stop an active transition instead of being ignored 
+    requeueOnImageNotLoaded: true, // requeue the slideshow if any image slides are not yet loaded 
+    requeueTimeout: 250   // ms delay for requeue
+-->
+
+
 			<width>
 				<TCEforms>
 					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_width</label>
@@ -182,69 +269,83 @@
 					<config>
 						<type>input</type>
 						<size>10</size>
-						<value>1500</value>
+						<default>1500</default>
 					</config>
 				</TCEforms>
 			</height>
 
+<!-- timeout:       4000,  // milliseconds between slide transitions (0 to disable auto advance) -->
 			<timeout>
 				<TCEforms>
-				<!--  displayCond>FIELD:feature:IN:13</displayCond-->
 					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_timeout</label>
 					<config>
 						<type>input</type>
 						<size>10</size>
-						<value>1500</value>
+						<default>4000</default>
 					</config>
 				</TCEforms>
 			</timeout>
 
-			<delay>
-				<TCEforms>
-				<displayCond>FIELD:feature:IN:18</displayCond>
-					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_delay</label>
-					<config>
-						<type>input</type>
-						<size>10</size>
-						<value>1500</value>
-					</config>
-				</TCEforms>
-			</delay>
-			
+
+<!--     speed:         1000,  // speed of the transition (any valid fx speed value) -->			
 			<speed>
 				<TCEforms>
-				<!-- displayCond>FIELD:feature:IN:8,13</displayCond -->
 					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_speed</label>
 					<config>
 						<type>input</type>
 						<size>10</size>
-						<value>1500</value>
+						<default>1000</default>
 					</config>
 				</TCEforms>
 			</speed>
-
+<!--   speedIn:       null,  // speed of the 'in' transition -->
+			<speedIn>
+				<TCEforms>
+					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_speedIn</label>
+					<config>
+						<type>input</type>
+						<size>10</size>
+						<default>0</default>
+					</config>
+				</TCEforms>
+			</speedIn>
+ 
+<!--  speedOut:      null,  // speed of the 'out' transition -->
+			<speedOut>
+				<TCEforms>
+					<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_speedOut</label>
+					<config>
+						<type>input</type>
+						<size>10</size>
+						<default>0</default>
+					</config>
+				</TCEforms>
+			</speedOut>
+ 
+     
+<!-- random:        0,     // true for random, false for sequence (not applicable to shuffle fx)  -->
             <random>
 	            <TCEforms>
-	            <!-- displayCond>FIELD:feature:IN:8,13</displayCond -->
 	                <label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_random</label>
-	                <config>
-	                   <type>check</type>
-	                   <value>1</value>
-	                </config>
-	            </TCEforms>
-            </random>
-
-            <sync>
-	            <TCEforms>
-	            <!-- displayCond>FIELD:feature:IN:28</displayCond -->
-	                <label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_sync</label>
 	                <config>
 	                   <type>check</type>
 	                   <value>0</value>
 	                </config>
 	            </TCEforms>
+            </random>
+
+<!--   sync:          1,     // true if in/out transitions should occur simultaneously -->  
+            <sync>
+	            <TCEforms>
+	                <label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_sync</label>
+	                <config>
+	                   <type>check</type>
+	                   <value>1</value>
+	                </config>
+	            </TCEforms>
             </sync>
 
+<!-- pause:         0,     // true to enable "pause on hover" -->
             <pause>
 	            <TCEforms>
 	            <!-- displayCond>FIELD:feature:IN:8,18</displayCond -->
@@ -256,7 +357,31 @@
 	            </TCEforms>
             </pause>
 
+ <!-- delay:         0,     // additional delay (in ms) for first transition (hint: can be negative) -->
+             <delay>
+	            <TCEforms>
+	                <label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_delay</label>
+	                <config>
+						<type>input</type>
+						<size>10</size>
+						<default>0</default>
+	                </config>
+	            </TCEforms>
+            </delay>
 
+ <!-- continuous:    0,     // true to start next transition immediately after current one completes -->
+             <continuous>
+	            <TCEforms>
+	                <label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_continuous</label>
+	                <config>
+						<type>input</type>
+						<size>10</size>
+						<default>0</default>
+	                </config>
+	            </TCEforms>
+            </continuous>
+
+ 
 
             </el>
 
@@ -264,6 +389,49 @@
 </s_configuration>
 
 
+<s_advanced>
+	<ROOT>
+		<TCEforms>
+			<sheetTitle>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_sheet_advanced</sheetTitle>
+		</TCEforms>
+			
+		<type>array</type>
+		<el>
+
+
+           <useAdvanced>
+            <TCEforms>
+            <!-- displayCond>FIELD:feature:IN:8,18</displayCond -->
+                <label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_useAdvanced</label>
+                <config>
+                   <type>check</type>
+                   <value>0</value>
+                </config>
+            </TCEforms>
+           </useAdvanced>
+
+
+		<advanced>
+			<TCEforms>
+			<label>LLL:EXT:tmd_jqcycle/locallang_db.xml:tx_tmdjqcycle_advanced</label>
+			<config>
+				<type>text</type>
+	     		 <size>15</size>
+                 <rows>6</rows>
+                 <default>fx:   'shuffle', 
+shuffle: { 
+    top:  -230, 
+    left:  230 
+}, 
+delay: -2000</default>
+			</config>
+		</TCEforms>
+		</advanced>
+
+		</el>
+        
+	</ROOT>
+</s_advanced>
 
 
 		
