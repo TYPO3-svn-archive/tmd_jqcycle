@@ -61,24 +61,29 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		$images = explode(',', $this->option('images', 's_image'));
 		
 		if(count($images) > 1) {
-
-				// checks if t3jquery is loaded
+						
+			// checks if t3jquery is loaded
 			if (t3lib_extMgm::isLoaded('t3jquery')) {
 			    require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
-			} else {
-				return "Error: t3jquery fehlt!";
 			}
-			
 			// if t3jquery is loaded and the custom Library had been created
 			if (T3JQUERY === true) {
-				tx_t3jquery::addJqJS();
+			    tx_t3jquery::addJqJS();
 			} else {
-				return "Error: t3jquery fehlt2!";
-				// Here you add your own version of jQuery library, which is used if the
-				// "t3jquery" extension is not installed.
-				#$GLOBALS['TSFE']->additionalHeaderData[] = ..
+				#return "Error: t3jquery fehlt2!";
+				
+			    // if none of the previous is true, you need to include your own library
+			    // just as an example in this way
+			    $GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.$this->getPath($this->conf['pathToJquery']).'" type="text/javascript"></script>';
 			}
-	
+			
+			
+			
+			
+			
+			
+			
+			
 				#JQuery-CYCLE Code kommt dazu.
 			$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
 
