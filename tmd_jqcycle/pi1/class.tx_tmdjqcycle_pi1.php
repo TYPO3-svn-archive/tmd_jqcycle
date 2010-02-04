@@ -58,61 +58,76 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		$this->pi_initPIflexForm();
 
+				// define the jQuery mode and function
+				# Wie funktioniert das?????
+		if ($this->conf['jQueryNoConflict']) {
+			$jQueryNoConflict = "jQuery.noConflict();";
+			$jQuery = "jQuery";
+		} else {
+			$jQueryNoConflict = "";
+			$jQuery = "$";
+		}
+		
+		
+		
 		$images = explode(',', $this->option('images', 's_image'));
 		
-		if(count($images) > 1) {
-						
-			// checks if t3jquery is loaded
-			if (t3lib_extMgm::isLoaded('t3jquery')) {
-			    require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
-			}
-			// if t3jquery is loaded and the custom Library had been created
-			if (T3JQUERY === true) {
-			    tx_t3jquery::addJqJS();
-			} else {
-				#return "Error: t3jquery fehlt2!";
-				
-			    // if none of the previous is true, you need to include your own library
-			    // just as an example in this way
-			    $GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.$this->getPath($this->conf['pathToJquery']).'" type="text/javascript"></script>';
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-				#JQuery-CYCLE Code kommt dazu.
-			$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
 
-					/* Konfiguration */
-			$this->initFeature();
-			$config  = "$(document).ready(function() {
-			    		$('#slideshow-".$this->param['id']."').cycle({";
+					
+		// checks if t3jquery is loaded
+		if (t3lib_extMgm::isLoaded('t3jquery')) {
+		    require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+		}
+		// if t3jquery is loaded and the custom Library had been created
+		if (T3JQUERY === true) {
+		    tx_t3jquery::addJqJS();
+		} else {
+			#return "Error: t3jquery fehlt2!";
+			
+		    // if none of the previous is true, you need to include your own library
+		    // just as an example in this way
+		    $GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.$this->getPath($this->conf['pathToJquery']).'" type="text/javascript"></script>';
+		}
+			
+			#JQuery-CYCLE Code kommt dazu.
+		$GLOBALS['TSFE']->additionalHeaderData[$ext_key] = '<script src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/jquery.cycle.all.min.js'.'" type="text/javascript"></script>';
 
 
-				if($this->option('useAdvanced',  's_advanced') != 1) {
-					foreach($this->param as $key => $val) {
-						$line[] = $key.': "'.$val.'"';
-					}
-					$config .= implode(',', $line);
-				} else {
-					$config .= $this->option('advanced',  's_advanced');
+				/* Konfiguration */
+		$this->initFeature();
+		$config   = $jQueryNoConflict;
+		$config  .= $jQuery."(document).ready(function() {".
+		    		$jQuery."('#slideshow-".$this->param['id']."').cycle({";
+
+
+			if($this->option('useAdvanced',  's_advanced') != 1) {
+				foreach($this->param as $key => $val) {
+					$line[] = $key.': "'.$val.'"';
 				}
-				
-			$config .= "	});
-						});";
+				$config .= implode(',', $line);
+			} else {
+				$config .= $this->option('advanced',  's_advanced');
+			}
+			
+		$config .= "	});
+					});";
 
 	
-			$content = t3lib_div::wrapJS($config);
-	
+		$content = t3lib_div::wrapJS($config);
+			
+		if(!$this->conf['image']) {
 			$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
 			$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
-	
+		}
+
+		if(count($images) > 1) {
 			foreach($images as $img) {
-				$this->conf['image.']['file'] = $this->uploadPath.$img;
+				if($this->conf['image.']['file'] == 'GIFBUILDER') {
+					$this->conf['image.']['file.']['10.']['file'] = $this->uploadPath.$img;
+				} else {
+					$this->conf['image.']['file'] = $this->uploadPath.$img;
+				}
+				
 	 			$files[] = $this->cObj->IMAGE($this->conf['image.']);
 			}
 	
@@ -121,9 +136,7 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 			$content .= '</div>';
 		} else { # nur ein Bild vorhanden
 			$this->conf['image.']['file'] = $this->uploadPath.$images[0];
-			$this->conf['image.']['file.']['width']  = $this->option('width',  's_configuration');
-			$this->conf['image.']['file.']['height'] = $this->option('height', 's_configuration');
-
+			
 			$content = $this->cObj->IMAGE($this->conf['image.']);
 		}
 

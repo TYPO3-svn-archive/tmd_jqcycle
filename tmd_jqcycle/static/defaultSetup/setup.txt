@@ -61,4 +61,5 @@ plugin.tx_tmdjqcycle_pi1 {
 	delay = 0
 	continuous = 0
 
+	jQueryNoConflict = {$plugin.tx_tmdjqcycle.jQueryNoConflict}
 }
