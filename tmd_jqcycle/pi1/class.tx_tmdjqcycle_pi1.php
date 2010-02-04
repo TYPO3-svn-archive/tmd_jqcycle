@@ -99,19 +99,17 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 		$config  .= $jQuery."(document).ready(function() {".
 		    		$jQuery."('#slideshow-".$this->param['id']."').cycle({";
 
-
-			if($this->option('useAdvanced',  's_advanced') != 1) {
-				foreach($this->param as $key => $val) {
-					$line[] = $key.': "'.$val.'"';
-				}
-				$config .= implode(',', $line);
-			} else {
-				$config .= $this->option('advanced',  's_advanced');
+		if($this->option('useAdvanced',  's_advanced') != 1) {
+			foreach($this->param as $key => $val) {
+				$line[] = $key.': "'.$val.'"';
 			}
+			$config .= implode(',', $line);
+		} else {
+			$config .= $this->option('advanced',  's_advanced');
+		}
 			
 		$config .= "	});
 					});";
-
 	
 		$content = t3lib_div::wrapJS($config);
 			
@@ -165,7 +163,7 @@ class tx_tmdjqcycle_pi1 extends tslib_pibase {
 	function initFeature() {
 		$this->param = array(
 			"id" => rand(1000, 9999),
-			"fx" => 'fade',
+			"fx" 		=> $this->option("feature", "s_configuration"),
 			"width" 	=> $this->option("width", "s_configuration"),
 			"height" 	=> $this->option("height", "s_configuration"),
 			"timeout" 	=> $this->option("timeout", "s_configuration"),

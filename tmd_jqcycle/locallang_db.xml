@@ -35,35 +35,6 @@
  			<label index="tx_tmdjqcycle_continuous">continuous: 0,     // true to start next transition immediately after current one completes</label>
 
 			<label index="tx_tmdjqcycle_feature">Effekt</label>
-			<label index="tx_tmdjqcycle_feature2">blindX</label>
-			<label index="tx_tmdjqcycle_feature3">blindY</label>
-			<label index="tx_tmdjqcycle_feature4">blindZ</label>
-			<label index="tx_tmdjqcycle_feature5">cover</label>
-			<label index="tx_tmdjqcycle_feature6">curtainX</label>
-			<label index="tx_tmdjqcycle_feature7">curtainY</label>
-			<label index="tx_tmdjqcycle_feature8">fade</label>
-			<label index="tx_tmdjqcycle_feature9">fadeZoom</label>
-			<label index="tx_tmdjqcycle_feature10">growX</label>
-			<label index="tx_tmdjqcycle_feature11">growY</label>
-			<label index="tx_tmdjqcycle_feature12">scrollUp</label>
-			<label index="tx_tmdjqcycle_feature13">scrollDown</label>
-			<label index="tx_tmdjqcycle_feature14">scrollLeft</label>
-			<label index="tx_tmdjqcycle_feature15">scrollRight</label>
-			<label index="tx_tmdjqcycle_feature16">scrollHorz</label>
-			<label index="tx_tmdjqcycle_feature17">scrollVert</label>
-			<label index="tx_tmdjqcycle_feature18">shuffle</label>
-			<label index="tx_tmdjqcycle_feature19">slideX</label>
-			<label index="tx_tmdjqcycle_feature20">slideY</label>
-			<label index="tx_tmdjqcycle_feature21">toss</label>
-			<label index="tx_tmdjqcycle_feature22">turnUp</label>
-			<label index="tx_tmdjqcycle_feature23">turnDown</label>
-			<label index="tx_tmdjqcycle_feature24">turnLeft</label>
-			<label index="tx_tmdjqcycle_feature25">turnRight</label>
-			<label index="tx_tmdjqcycle_feature26">uncover</label>
-			<label index="tx_tmdjqcycle_feature27">wipe</label>
-			<label index="tx_tmdjqcycle_feature28">zoom</label>
-
-
 		</languageKey>
 		
 		<languageKey index="de" type="array">
